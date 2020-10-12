@@ -608,7 +608,7 @@ produce_rplot = function(plot_data){
   # P-Value transformation --------------------------------------------------
   plot_data <-
     plot_data %>%
-    mutate(p.value = -1 * log10(p.value))
+    dplyr::mutate(p.value = -1 * log10(p.value))
 
   # Calculate symmetric limits based on most extreme value
   max_abs_estimate <- max(abs(plot_data$estimate))
@@ -629,7 +629,7 @@ produce_rplot = function(plot_data){
 
   cluster_data <-
     cluster_data %>%
-    select(-term) %>%
+    dplyr::select(-term) %>%
     as.matrix()
 
   rownames(cluster_data) <- rnms
@@ -644,7 +644,7 @@ produce_rplot = function(plot_data){
   # Convert term to a factor, ordered by `term_order`
   plot_data_clo <-
     plot_data %>%
-    mutate(term = factor(term, levels = term_order))
+    dplyr::mutate(term = factor(term, levels = term_order))
 
   # Theme + Palette ---------------------------------------------------------
   ## Palette
