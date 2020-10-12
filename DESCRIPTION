@@ -1,11 +1,33 @@
 Package: metabolitesAnalyzer
 Type: Package
-Title: What the Package Does (Title Case)
+Title: Metabolites Quality Check and Analysis (Title Case)
 Version: 0.1.0
-Author: Who wrote it
-Maintainer: The package maintainer <yourself@somewhere.net>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
-License: What license is it under?
+Author: Yanyan Liu
+Maintainer: The package maintainer <yanyanliujs@gmail.com>
+Description: This package has three main functions: MetaQ, MetaD and MetaA. 
+    MetaQ checks quality of metabolites, and creates t_SNE plots, well median plot,
+    statistic summary for metabolites measured. 
+    MetaD creates demographic tables for subjectes have metabolites measured.
+    MetaA creates waterfall plots, volcano plots, and rain plots, it also creats
+    the liner model output. 
+License: MIT License
 Encoding: UTF-8
 LazyData: true
+Imports:
+        dplyr,
+        ggplot2,
+        raster,
+        Rtsne,
+        RColorBrewer,
+        gplots,
+        plyr,
+        egg,
+        psych,
+        sva,
+        rlang,
+        tibble
+RoxygenNote: 7.1.1
+Suggests: 
+    knitr,
+    rmarkdown
+VignetteBuilder: knitr
