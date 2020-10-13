@@ -376,7 +376,7 @@ get_median_plots_for_both = function(median_df){
 
 
   p =median_df %>%
-    ggplot2::ggplot(aes(order, row_median, color = group, shape = plate)) +
+    ggplot2::ggplot(aes(order, row_median, color = group)) +
     ggplot2::geom_point()+
     ggplot2::ylab("metabolite_median") +
     ggplot2::ggtitle("metabolite_median vs analysis order")+
