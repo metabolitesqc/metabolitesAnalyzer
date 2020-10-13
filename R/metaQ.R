@@ -80,8 +80,9 @@ get_na_count = function(df_sample){
 
   sample_missing_df =df_sample[ names(df_sample) %in% c( meta)]
 
+
   na_count_samples  = as.data.frame(sapply(sample_missing_df,
-                                           function(y) sum(length(which(is.na(y))))))
+                                           function(y) sum(is.na(y))))
 
   names(na_count_samples) ="NA_count"
 
