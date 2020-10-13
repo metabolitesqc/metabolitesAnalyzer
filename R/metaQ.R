@@ -30,6 +30,8 @@ metaQ = function(df_sample,
 
   pp_median = get_moving_median(df_pp)
   plot_moving_pp = plot_moving_median(pp_median)
+  plot_moving_pp =plot_moving_pp +
+    theme(legend.position = "none")
 
   sample_median = get_moving_median(df_sample)
   readr::write_csv(sample_median, "sample_median.csv" )
@@ -376,7 +378,7 @@ get_median_plots_for_both = function(median_df){
 
 
   p =median_df %>%
-    ggplot2::ggplot(aes(order, row_median, color = group, shape = plate)) +
+    ggplot2::ggplot(aes(order, row_median, color = group)) +
     ggplot2::geom_point()+
     ggplot2::ylab("metabolite_median") +
     ggplot2::ggtitle("metabolite_median vs analysis order")+
