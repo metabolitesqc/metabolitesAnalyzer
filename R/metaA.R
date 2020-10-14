@@ -37,7 +37,7 @@ metaA = function(df_meta,
                                            no_signal_correction)
 
   waterfall_plots = get_waterfall_plots(linear_model_res)
-  ggsave("walterfall_plots.pdf")
+  ggsave("walterfall_plots.pdf", width =18, height =18)
 
 
   if(output_clin_rainplot == TRUE){
@@ -54,7 +54,7 @@ metaA = function(df_meta,
   if(no_signal_correction == TRUE & plot_volcano == TRUE){
     df_fold = get_fold_change(df_meta, df_clinical, trt_var)
     volcano_plot = get_volcano_plots(linear_model_res,df_fold)
-    ggsave("volcano_plot.pdf")
+    ggsave("volcano_plot.pdf", width =18, height =18)
   }
 
   return( list(linear_model_res =linear_model_res))
