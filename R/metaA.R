@@ -78,26 +78,18 @@ get_linear_model_res = function(df_meta,
 
   df = df_meta %>%
     dplyr::inner_join(df_clinical, by = "subjectId")
-  print(dim(df))
 
   meta = names(df)[grepl("[0-9]", names(df))]
-
-  print(length(adjustment_var))
-  print(adjustment_var)
-  print(is.null(adjustment_var))
 
   if(  length(adjustment_var) == 0){
 
     df = df[ names(df) %in% c(meta, trt_var) ]
     variables = c(trt_var)
 
-    print("before only---------------------")
     f = as.formula(
       paste("meta_reading",
             paste(variables),
             sep = " ~ "))
-    print("only---------------------")
-    print(f)
 
     df_long = df %>%
       dplyr::select(trt_var, everything()) %>%
@@ -106,7 +98,7 @@ get_linear_model_res = function(df_meta,
 
   }else{
     adjustment_var = unlist(stringr::str_split(adjustment_var, " "))
-    print(adjustment_var)
+
     df =df[ names(df) %in% c(meta, trt_var, adjustment_var) ]
     variables = c(trt_var, adjustment_var)
 
@@ -114,8 +106,6 @@ get_linear_model_res = function(df_meta,
       paste("meta_reading",
             paste(variables, collapse = " + "),
             sep = " ~ "))
-    print("not only------------------------")
-    print(f)
 
     df_long = df %>%
       dplyr::select(trt_var, adjustment_var, everything()) %>%
@@ -150,14 +140,12 @@ get_linear_model_res = function(df_meta,
 
     report = wilcox_report %>%
       dplyr::left_join(lm_report, by ="meta")
-    print("printed first")
 
     readr::write_csv( report, "lm_report.csv")
 
-
     return(report)
   }else{
-    print("printed second")
+
     readr::write_csv( lm_report, "lm_report.csv")
     return(lm_report)
 
@@ -171,9 +159,6 @@ get_linear_model_res = function(df_meta,
 get_waterfall_plots = function(linear_model_res){
 
 
-  print(max(linear_model_res$estimate, na.rm = TRUE))
-  print(min(linear_model_res$estimate, na.rm = TRUE))
-
   index_max = which.max(linear_model_res$estimate)
   linear_model_res = linear_model_res[-index_max,]
 
@@ -184,14 +169,10 @@ get_waterfall_plots = function(linear_model_res){
     dplyr::mutate(log10_p = -log10(wilcox_p_value)) %>%
     dplyr::mutate( log10_p = round(log10_p,2))
 
-
-  print(dim(df_w))
-  print(summary(df_w$log10_p))
   scale.min=0
   scale.max= max(df_w$log10_p, na.rm = T)
   middle.pt = 1.3
-  print("============================================")
-  print(scale.max)
+
   by_scale = round(scale.max/4,2)
 
   p= df_w %>%
@@ -443,7 +424,6 @@ get_combat_corrected_data= function(df_meta){
   edata$subjectId = NULL
 
   edata = t(edata)
-  print(class(edata))
 
   combat_edata = ComBat(dat=edata, batch=batch, mod=NULL, par.prior=TRUE, prior.plots=FALSE)
   combat_edata = as.data.frame(t(combat_edata))
@@ -538,10 +518,8 @@ get_clinical_df_for_rplt = function(df_clinical,
 
 get_clin_association = function(df_clinical, df_meta, top_30_meta, clinical_var){
 
-  print(head(names(df_meta)))
-  print(top_30_meta)
   df_data = df_meta[, top_30_meta ]
-  print(class(df_data))
+
 
   meta_name = names(df_data)
   name1 = meta_name[1]
@@ -553,10 +531,6 @@ get_clin_association = function(df_clinical, df_meta, top_30_meta, clinical_var)
   df_clin = df_clinical[ c("subjectId",clinical_var )]
   df_data = df_meta[ c("subjectId", top_30_meta)]
 
-  print("00000000000000000000000000000000")
-  print(names(df_data))
-  print(names(df_clin))
-  print("00000000000000000000000000000000")
 
   df = df_data %>%
     dplyr::inner_join (df_clin, by ="subjectId")

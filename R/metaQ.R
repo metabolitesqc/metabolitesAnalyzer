@@ -281,7 +281,7 @@ get_tSNE_plots = function(df, perplexity=30){
 
   tsne_output  = Rtsne(df[,-c(1)],dims = 3,
                        theta =0, pca=TRUE,
-                       initial_dims = 200, eta=100, verbose=TRUE,
+                       initial_dims = 200, eta=100, verbose=FALSE,
                        max_iter = 500 , pca_scale=TRUE, check_duplicates = FALSE)
 
   # Store the first two coordinates and plot them
@@ -336,7 +336,6 @@ get_moving_median = function(df){
   df = as.data.frame(t(df))
 
   row_median = as.data.frame( apply(df, 2,median, na.rm = TRUE))
-  print(head(row_median))
 
   names(row_median) ="row_median"
 

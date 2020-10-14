@@ -15,8 +15,7 @@ metaG = function(df, trt_var){
   names(df) = stringr::str_to_lower(names(df))
 
   if(trt_var %in% names(df)){
-    #for categorical var
-    print(trt_var)
+
 
     df_placebo =df %>%
       dplyr::filter( (!!sym(trt_var))==0)
@@ -26,10 +25,6 @@ metaG = function(df, trt_var){
 
 
     df_total = df
-
-    print(dim(df_placebo))
-    print(dim(df_trt))
-    print(dim(df_total))
 
     cat_trt = get_cat_var_summary(df_trt, "Treatment/case")
     cat_placebo = get_cat_var_summary(df_placebo, "Placebo/control")
@@ -74,7 +69,6 @@ get_cat_var_summary = function(df, name){
     dplyr::filter(cat_flag ==1) %>%
     dplyr::pull(cat_var)
 
-  print(cat_var)
 
   cat_df = df %>%
     dplyr::select(subjectid, cat_var)
