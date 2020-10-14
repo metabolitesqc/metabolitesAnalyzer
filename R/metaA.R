@@ -94,7 +94,8 @@ get_linear_model_res = function(df_meta,
     df_long = df %>%
       dplyr::select(trt_var, everything()) %>%
       tidyr::gather(key="meta", value="meta_reading", -variables) %>%
-      tidyr::nest(-meta)
+      #tidyr::nest(-meta)
+      tidyr::nest(data = c(variables, meta_reading))
 
   }else{
     adjustment_var = unlist(stringr::str_split(adjustment_var, " "))
@@ -110,7 +111,8 @@ get_linear_model_res = function(df_meta,
     df_long = df %>%
       dplyr::select(trt_var, adjustment_var, everything()) %>%
       tidyr::gather(key="meta", value="meta_reading", -variables) %>%
-      tidyr::nest(-meta)
+      #tidyr::nest(-meta)
+      tidyr::nest(data = c(variables, meta_reading))
   }
 
   f2 = as.formula(
