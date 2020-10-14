@@ -191,10 +191,9 @@ get_pp_cv_plot = function(df_pp){
 
   cv_res= cv_res %>%
     dplyr::filter(!is.na(CV)) %>%
-    dplyr::mutate( percentage = round((1:dim(cv_res)[1])*100/dim(cv_res)[1], 4)) %>%
-    dplyr::filter( percentage < 98) %>%
-    dplyr::mutate( percentage = round((1:dim(cv_res)[1])*100/dim(cv_res)[1], 4))
-
+    dplyr::mutate( percentage = round((1:dim(.)[1])*100/dim(.)[1], 4)) %>%
+    dplyr::filter( percentage < 99.5) %>%
+    dplyr::mutate( percentage = round((1:dim(.)[1])*100/dim(.)[1], 4))
 
   cv_res = cv_res %>%
     dplyr::mutate(CV = round(CV, 1),
