@@ -84,6 +84,8 @@ get_na_count = function(df_sample){
   na_count_samples  = as.data.frame(sapply(sample_missing_df,
                                            function(y) sum(is.na(y))))
 
+
+
   names(na_count_samples) ="NA_count"
 
   na_count = na_count_samples %>%
@@ -98,7 +100,8 @@ get_na_count = function(df_sample){
 
 
 
-get_na_count_plot = function(na_count){
+
+get_na_count_plot = function(na_count, df_sample){
 
   index5 = which.min(abs(na_count$percentage -5))
   index10 = which.min(abs(na_count$percentage -10))
@@ -113,7 +116,7 @@ get_na_count_plot = function(na_count){
   p=na_count %>%
     ggplot2::ggplot(aes(rank, NA_count)) +
     ggplot2::geom_point() +
-    ggplot2::ggtitle("missing count and missing percentage by metabolite") +
+    ggplot2::ggtitle("missing count and missing percentage by metabolite")+
     ggplot2::xlab("metabolite's missing count rank")+
 
     theme_bw()+
@@ -127,14 +130,15 @@ get_na_count_plot = function(na_count){
     geom_hline(yintercept=na_count_imp$NA_count[[3]] , linetype = "dashed", color = "red")+
     geom_hline(yintercept=na_count_imp$NA_count[[4]] , linetype = "dashed", color = "red")+
 
-    ggplot2::scale_y_continuous(limits=c(-10, nrow(na_count)+10), expand = c(0, 0), breaks =
-                                  sort(c(seq(0, 100*(round(nrow(na_count)/100,0) +1), length.out=4),
+    ggplot2::scale_y_continuous(limits=c(-10, nrow(df_sample)+10), expand = c(0, 0), breaks =
+                                  sort(c(seq(0, round (nrow(df_sample), digits=-2 ),
+                                             length.out= 5),
                                          round(na_count_imp$NA_count[[1]],0),
                                          round(na_count_imp$NA_count[[2]],0),
                                          round(na_count_imp$NA_count[[3]],0),
                                          round(na_count_imp$NA_count[[4]],0))),
                                 name = expression("missing count out of total"),
-                                sec.axis = sec_axis(~ . * 100 / nrow(na_count) ,
+                                sec.axis = sec_axis(~ . * 100 / nrow(df_sample) ,
                                                     name = "missing percentage out of total",
                                                     breaks = sort(c(seq(0, 100, length.out=5),
                                                                     na_count_imp$percentage2[[1]],
@@ -144,8 +148,8 @@ get_na_count_plot = function(na_count){
 
     )+
     ggplot2::scale_x_continuous(limits=c(-15, nrow(na_count)+15), expand = c(0, 0),
-                                breaks = sort(c(seq(0, 100*(round(nrow(na_count)/100,0) +1),
-                                                    length.out=round(nrow(na_count)/200,0)-1)*2,
+                                breaks = sort(c(seq(0, round (nrow(na_count), digits=-3 ),
+                                                    length.out= 5),
                                                 round(na_count_imp$rank[[1]],0),
                                                 round(na_count_imp$rank[[2]],0 ),
                                                 round(na_count_imp$rank[[3]],0),
@@ -158,6 +162,8 @@ get_na_count_plot = function(na_count){
 
 
 }
+
+
 
 
 get_cv = function(df_pp){
