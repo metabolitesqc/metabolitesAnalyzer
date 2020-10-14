@@ -82,7 +82,7 @@ get_cat_var_summary = function(df, name){
   res = as.data.frame( sapply(cat_df[-1], sum, na.rm =T))
   names(res) = "sum"
   sum_res = res %>%
-    dplyr::add_rownames(var ="clin")
+    tibble::rownames_to_column(var ="clin")
 
   results = mean_res %>%
     dplyr::left_join(sum_res, by ="clin") %>%
@@ -115,7 +115,7 @@ get_con_var_summary = function(df, name){
   res = as.data.frame( sapply(con_df[-1], median, na.rm =T))
   names(res) = "median"
   median_res = res %>%
-    dplyr::add_rownames(var ="clin") %>%
+    tibble::rownames_to_column(var ="clin") %>%
     dplyr::mutate(median = round(median,1))
 
   res = as.data.frame( sapply(con_df[-1], quantile, 0.25, na.rm =T))

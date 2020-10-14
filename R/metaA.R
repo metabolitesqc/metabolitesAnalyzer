@@ -294,7 +294,7 @@ get_fold_change = function(df_meta, df_clinical, trt_var){
   names(e) = "fold_change"
 
   fold_df = e %>%
-    dplyr::add_rownames( var = "meta") %>%
+    tibble::rownames_to_column( var = "meta") %>%
     dplyr::arrange(-fold_change)
 
   return(fold_df)

@@ -120,8 +120,7 @@ get_na_count_plot = function(na_count, df_sample){
     ggplot2::xlab("metabolite's missing count rank")+
 
     theme_bw()+
-    geom_vline(xintercept=na_count_imp$rank[[1]] , linetype = "dashed", color = "red",
-               xend=na_count_imp$rank[[1]]) +
+    geom_vline(xintercept=na_count_imp$rank[[1]] , linetype = "dashed", color = "red") +
     geom_vline(xintercept=na_count_imp$rank[[2]] , linetype = "dashed", color = "red") +
     geom_vline(xintercept=na_count_imp$rank[[3]] , linetype = "dashed", color = "red") +
     geom_vline(xintercept=na_count_imp$rank[[4]] , linetype = "dashed", color = "red") +
@@ -172,7 +171,7 @@ get_cv = function(df_pp){
   cv_res = as.data.frame(sapply(pp_meta_df, raster::cv, na.rm = TRUE))
   names(cv_res) = c("CV")
   cv_res = cv_res %>%
-    dplyr::add_rownames(var = "meta_name")
+    tibble::rownames_to_column(var = "meta_name")
   return(cv_res)
 }
 
@@ -229,7 +228,7 @@ get_pp_cv_plot = function(df_pp){
 
 
 }
-
+?ggplot2::geom_segment()
 
 
 
@@ -340,7 +339,7 @@ get_moving_median = function(df){
   names(row_median) ="row_median"
 
   median_df = row_median %>%
-    dplyr::add_rownames(var ="plate_well") %>%
+    tibble::rownames_to_column(var ="plate_well") %>%
     tidyr::separate(plate_well, c("plate", "well")) %>%
     dplyr::mutate(plate = as.numeric(plate),
                   well = as.numeric(well)) %>%
@@ -405,7 +404,7 @@ get_psych_summary = function(df){
 
   tot = nrow(df)
   df_sum = df_sum %>%
-    dplyr::add_rownames(var = "meta_name") %>%
+    tibble::rownames_to_column(var = "meta_name") %>%
     dplyr::mutate(na_count = tot -n) %>%
     dplyr::select(meta_name, n, na_count, mean, median, sd, trimmed, min, max, range)
 
