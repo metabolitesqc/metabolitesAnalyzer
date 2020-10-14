@@ -207,7 +207,7 @@ get_volcano_plots = function(linear_model_res,
     dplyr::select(meta,  wilcox_p_value, p.adjust)
 
   df_vol = df_fold %>%
-    dplyr::left_join(df_p) %>%
+    dplyr::left_join(df_p, by ="meta") %>%
     dplyr::select(wilcox_p_value, p.adjust, fold_change) %>%
     dplyr::mutate(log2_fold = log2(fold_change),
                   `-log10_p` = -log10(wilcox_p_value)) %>%
@@ -545,7 +545,7 @@ get_clin_association = function(df_clinical, df_meta, top_30_meta, clinical_var)
   lm_res=nested_long %>%
     dplyr::mutate( model = purrr::map(data, clin_model )) %>%
     dplyr::mutate( glance = purrr::map(model, broom::tidy)) %>%
-    dplyr::select(meta, glance) %>%
+    dplyr::select(clin, meta, glance) %>%
     tidyr::unnest(cols= c(glance)) %>%
     dplyr::filter(term =="meta_reading") %>%
     dplyr::select(meta, clin, estimate, p.value)
