@@ -27,7 +27,7 @@ metaA(
 
 \item{adjustment_var, }{adjustment variable in the linear model}
 
-\item{no_signal_correction, }{defaults to true}
+\item{no_signal_correction, }{defaults to true for data with two years}
 
 \item{plot_volcano, }{defaults to true}
 

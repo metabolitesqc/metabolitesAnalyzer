@@ -13,7 +13,7 @@
 #' @param trt_var, treatment variable
 #' @param clinical_var, clinical variables in the rainplot
 #' @param adjustment_var, adjustment variable in the linear model
-#' @param no_signal_correction, defaults to true
+#' @param no_signal_correction, defaults to true for data with two years
 #' @param plot_volcano, defaults to true
 #' @param output_trt_association, defaults to true
 #' @param output_clin_rainplot, defaults to true
