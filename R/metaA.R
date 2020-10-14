@@ -546,7 +546,7 @@ get_clin_association = function(df_clinical, df_meta, top_30_meta, clinical_var)
     dplyr::mutate( model = purrr::map(data, clin_model )) %>%
     dplyr::mutate( glance = purrr::map(model, broom::tidy)) %>%
     dplyr::select(meta, glance) %>%
-    tidyr::unnest() %>%
+    tidyr::unnest(meta, glance) %>%
     dplyr::filter(term =="meta_reading") %>%
     dplyr::select(meta, clin, estimate, p.value)
 

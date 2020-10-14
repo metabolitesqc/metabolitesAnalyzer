@@ -41,8 +41,8 @@ metaG = function(df, trt_var){
     total_df = dplyr::bind_rows( cat_total, con_total )
 
     final_res = trt_df %>%
-      dplyr::left_join(placebo_df) %>%
-      dplyr::left_join(total_df)
+      dplyr::left_join(placebo_df, by="clin") %>%
+      dplyr::left_join(total_df, by="clin")
 
     names(final_res) = c("clin", paste("Treatment/case",nrow(df_trt)), paste("Placebo/control", nrow(df_placebo)) , paste("Total", nrow(df_total)) )
     return(final_res)
