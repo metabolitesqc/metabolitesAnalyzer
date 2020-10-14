@@ -42,7 +42,7 @@ metaQ = function(df_sample,
 
 
   na_count = get_na_count(df_sample)
-  plot_na = get_na_count_plot(na_count)
+  plot_na = get_na_count_plot(na_count, df_sample)
 
   cv_res = get_cv(df_pp)
   plot_cv = get_pp_cv_plot(df_pp)
