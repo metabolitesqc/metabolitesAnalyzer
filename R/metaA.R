@@ -123,7 +123,7 @@ get_linear_model_res = function(df_meta,
     dplyr::mutate( model = purrr::map(.$data, ~lm(f, data =.x))) %>%
     dplyr::mutate(glance = purrr::map(model, broom::tidy, conf.int = TRUE, conf.level = 0.95)) %>%
     dplyr::select(meta, glance) %>%
-    tidyr::unnest() %>%
+    tidyr::unnest( -c(meta, glance)) %>%
     dplyr::filter(term == trt_var) %>%
     dplyr::select(meta, term, estimate,conf.low, conf.high, p.value) %>%
     dplyr::arrange(p.value) %>%
@@ -546,7 +546,7 @@ get_clin_association = function(df_clinical, df_meta, top_30_meta, clinical_var)
     dplyr::mutate( model = purrr::map(data, clin_model )) %>%
     dplyr::mutate( glance = purrr::map(model, broom::tidy)) %>%
     dplyr::select(meta, glance) %>%
-    tidyr::unnest(meta, glance) %>%
+    tidyr::unnest(-c(meta, glance)) %>%
     dplyr::filter(term =="meta_reading") %>%
     dplyr::select(meta, clin, estimate, p.value)
 
