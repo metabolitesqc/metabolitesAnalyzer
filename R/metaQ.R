@@ -404,13 +404,14 @@ get_psych_summary = function(df){
 
   meta = names(df)[grepl("[0-9]", names(df))]
 
-  df =df %>%
-    dplyr::select(meta)
 
   df_sum = psych::describe(df, fast= FALSE)
 
   tot = nrow(df)
   df_sum$meta_name = rownames(df_sum)
+
+  df_sum = df_sum %>%
+    dplyr::filter( meta_name %in% meta)
 
   df_sum = df_sum %>%
     dplyr::mutate(na_count = tot -n) %>%
