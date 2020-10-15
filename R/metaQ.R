@@ -51,7 +51,7 @@ metaQ = function(df_sample,
 
   psych_summary = get_psych_summary(df_sample)
 
-  #summary_rep = get_summary(psych_summary, cv_res)
+
 
   pdf('t_SNE.pdf', width = 12, height = 8)
   ggarrange(plot_tSNE[[1]], plot_tSNE[[2]], plot_tSNE[[3]], widths= c(1.5,1.5, 1.5))
@@ -400,45 +400,5 @@ get_psych_summary = function(df){
 }
 
 
-# get_psych_summary = function(df){
-#
-#   meta = names(df)[grepl("[0-9]", names(df))]
-#
-#
-#   df_sum = psych::describe(df, fast= FALSE)
-#
-#   tot = nrow(df)
-#   df_sum$meta_name = rownames(df_sum)
-#
-#   df_sum = df_sum %>%
-#     dplyr::filter( meta_name %in% meta)
-#
-#   df_sum = df_sum %>%
-#     dplyr::mutate(na_count = tot -n) %>%
-#     dplyr::select(meta_name, n, na_count, mean, median, sd, trimmed, min, max, range)
-#
-#   return( df_sum)
-# }
 
-
-get_summary = function(psych_summary, cv_res){
-
-  cv_res = cv_res %>%
-    dplyr::select(meta_name, CV)
-
-  print("88888888888hhhhhhhhhhhhhhhhhhhhhhhhhhhhh")
-  print(dim(cv_res))
-  print(dim(psych_summary))
-  print("88888888888hhhhhhhhhhhhhhhhhhhhhhhhhhhhh")
-  if( nrow(psych_summary) == nrow(cv_res)){
-    res = psych_summary %>%
-      dplyr::full_join( cv_res, by ="meta_name")
-  } else{
-    res = psych_summary
-  }
-
-  print(dim(res))
-  return(res)
-
-}
 
