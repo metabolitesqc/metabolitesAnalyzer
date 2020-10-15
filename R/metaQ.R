@@ -51,7 +51,7 @@ metaQ = function(df_sample,
 
   psych_summary = get_psych_summary(df_sample)
 
-  #summary_rep = get_summary(psych_summary, cv_res)
+  summary_rep = get_summary(psych_summary, cv_res)
 
   pdf('t_SNE.pdf', width = 12, height = 8)
   ggarrange(plot_tSNE[[1]], plot_tSNE[[2]], plot_tSNE[[3]], widths= c(1.5,1.5, 1.5))
@@ -65,7 +65,7 @@ metaQ = function(df_sample,
   ggarrange(plot_na, plot_cv, heights = c(1.5,1.5))
   dev.off()
 
-  return(list(na_count = na_count,  cv_res = cv_res, summary_report = psych_summary))
+  return(list(na_count = na_count,  cv_res = cv_res, summary_report = summary_rep))
 
 }
 
@@ -394,37 +394,30 @@ get_median_plots_for_both = function(median_df){
   return(p)
 }
 
-get_psych_summary = function(df){
-  df_sum = psych::describe(df, fast= FALSE)
-  return(df_sum)
-}
-
-
 # get_psych_summary = function(df){
-#
-#   meta = names(df)[grepl("[0-9]", names(df))]
-#
-#
-#   print("===================================================")
-#   print(meta[1:10])
-#   print(meta[ (length(meta)-10 ) : length(meta)])
-#   print("===================================================")
-#
-#   df =df %>%
-#     dplyr::select(meta)
-#
-#   df_sum = describe(df, fast= FALSE)
-#
-#   tot = nrow(df)
-#   df_sum = df_sum %>%
-#     tibble::rownames_to_column(var = "meta_name") %>%
-#     dplyr::mutate(na_count = tot -n) %>%
-#     dplyr::select(meta_name, n, na_count, mean, median, sd, trimmed, min, max, range)
-#
-#
-#
-#   return( df_sum)
+#   df_sum = psych::describe(df, fast= FALSE)
+#   return(df_sum)
 # }
+
+
+get_psych_summary = function(df){
+
+  meta = names(df)[grepl("[0-9]", names(df))]
+
+  df =df %>%
+    dplyr::select(meta)
+
+  df_sum = describe(df, fast= FALSE)
+
+  tot = nrow(df)
+  df_sum$meta_name = rownames(df_sum)
+
+  df_sum = df_sum %>%
+    dplyr::mutate(na_count = tot -n) %>%
+    dplyr::select(meta_name, n, na_count, mean, median, sd, trimmed, min, max, range)
+
+  return( df_sum)
+}
 
 
 get_summary = function(psych_summary, cv_res){
