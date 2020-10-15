@@ -400,8 +400,8 @@ get_psych_summary = function(df){
 
 
   print("===================================================")
-  print(head(names(meta)))
-  print(tail(names(meta)))
+  print(meta[1:10])
+  print(meta[ (length(meta)-10 ) : length(meta)])
   print("===================================================")
 
   df =df %>%
