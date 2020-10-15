@@ -51,7 +51,7 @@ metaQ = function(df_sample,
 
   psych_summary = get_psych_summary(df_sample)
 
-  summary_rep = get_summary(psych_summary, cv_res)
+  #summary_rep = get_summary(psych_summary, cv_res)
 
   pdf('t_SNE.pdf', width = 12, height = 8)
   ggarrange(plot_tSNE[[1]], plot_tSNE[[2]], plot_tSNE[[3]], widths= c(1.5,1.5, 1.5))
@@ -65,7 +65,7 @@ metaQ = function(df_sample,
   ggarrange(plot_na, plot_cv, heights = c(1.5,1.5))
   dev.off()
 
-  return(list(na_count = na_count,  cv_res = cv_res, summary_report = summary_rep))
+  return(list(na_count = na_count,  cv_res = cv_res, summary_report = psych_summary))
 
 }
 
