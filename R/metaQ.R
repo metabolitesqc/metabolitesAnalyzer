@@ -430,9 +430,13 @@ get_summary = function(psych_summary, cv_res){
   print(dim(cv_res))
   print(dim(psych_summary))
   print("88888888888hhhhhhhhhhhhhhhhhhhhhhhhhhhhh")
+  if( nrow(psych_summary) == nrow(cv_res)){
+    res = psych_summary %>%
+      dplyr::full_join( cv_res, by ="meta_name")
+  } else{
+    res = psych_summary
+  }
 
-  res = psych_summary %>%
-    dplyr::full_join( cv_res, by ="meta_name")
   print(dim(res))
   return(res)
 
