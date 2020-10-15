@@ -395,30 +395,36 @@ get_median_plots_for_both = function(median_df){
 }
 
 get_psych_summary = function(df){
-
-  meta = names(df)[grepl("[0-9]", names(df))]
-
-
-  print("===================================================")
-  print(meta[1:10])
-  print(meta[ (length(meta)-10 ) : length(meta)])
-  print("===================================================")
-
-  df =df %>%
-    dplyr::select(meta)
-
-  df_sum = describe(df, fast= FALSE)
-
-  tot = nrow(df)
-  df_sum = df_sum %>%
-    tibble::rownames_to_column(var = "meta_name") %>%
-    dplyr::mutate(na_count = tot -n) %>%
-    dplyr::select(meta_name, n, na_count, mean, median, sd, trimmed, min, max, range)
-
-
-
-  return( df_sum)
+  df_sum = psych::describe(df, fast= FALSE)
+  return(df_sum)
 }
+
+
+# get_psych_summary = function(df){
+#
+#   meta = names(df)[grepl("[0-9]", names(df))]
+#
+#
+#   print("===================================================")
+#   print(meta[1:10])
+#   print(meta[ (length(meta)-10 ) : length(meta)])
+#   print("===================================================")
+#
+#   df =df %>%
+#     dplyr::select(meta)
+#
+#   df_sum = describe(df, fast= FALSE)
+#
+#   tot = nrow(df)
+#   df_sum = df_sum %>%
+#     tibble::rownames_to_column(var = "meta_name") %>%
+#     dplyr::mutate(na_count = tot -n) %>%
+#     dplyr::select(meta_name, n, na_count, mean, median, sd, trimmed, min, max, range)
+#
+#
+#
+#   return( df_sum)
+# }
 
 
 get_summary = function(psych_summary, cv_res){
