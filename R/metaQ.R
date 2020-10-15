@@ -394,31 +394,31 @@ get_median_plots_for_both = function(median_df){
   return(p)
 }
 
-# get_psych_summary = function(df){
-#   df_sum = psych::describe(df, fast= FALSE)
-#   return(df_sum)
-# }
-
-
 get_psych_summary = function(df){
-
-  meta = names(df)[grepl("[0-9]", names(df))]
-
-
   df_sum = psych::describe(df, fast= FALSE)
-
-  tot = nrow(df)
-  df_sum$meta_name = rownames(df_sum)
-
-  df_sum = df_sum %>%
-    dplyr::filter( meta_name %in% meta)
-
-  df_sum = df_sum %>%
-    dplyr::mutate(na_count = tot -n) %>%
-    dplyr::select(meta_name, n, na_count, mean, median, sd, trimmed, min, max, range)
-
-  return( df_sum)
+  return(df_sum)
 }
+
+
+# get_psych_summary = function(df){
+#
+#   meta = names(df)[grepl("[0-9]", names(df))]
+#
+#
+#   df_sum = psych::describe(df, fast= FALSE)
+#
+#   tot = nrow(df)
+#   df_sum$meta_name = rownames(df_sum)
+#
+#   df_sum = df_sum %>%
+#     dplyr::filter( meta_name %in% meta)
+#
+#   df_sum = df_sum %>%
+#     dplyr::mutate(na_count = tot -n) %>%
+#     dplyr::select(meta_name, n, na_count, mean, median, sd, trimmed, min, max, range)
+#
+#   return( df_sum)
+# }
 
 
 get_summary = function(psych_summary, cv_res){
