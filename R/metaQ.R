@@ -407,7 +407,7 @@ get_psych_summary = function(df){
   df =df %>%
     dplyr::select(meta)
 
-  df_sum = describe(df, fast= FALSE)
+  df_sum = psych::describe(df, fast= FALSE)
 
   tot = nrow(df)
   df_sum$meta_name = rownames(df_sum)
