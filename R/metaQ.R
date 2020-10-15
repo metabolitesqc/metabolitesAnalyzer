@@ -433,6 +433,7 @@ get_summary = function(psych_summary, cv_res){
 
   res = psych_summary %>%
     dplyr::full_join( cv_res, by ="meta_name")
+  print(dim(res))
   return(res)
 
 }
