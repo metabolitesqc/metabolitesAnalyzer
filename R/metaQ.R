@@ -432,7 +432,7 @@ get_summary = function(psych_summary, cv_res){
   print("88888888888hhhhhhhhhhhhhhhhhhhhhhhhhhhhh")
 
   res = psych_summary %>%
-    dplyr::left_join( cv_res, by ="meta_name")
+    dplyr::full_join( cv_res, by ="meta_name")
   return(res)
 
 }
