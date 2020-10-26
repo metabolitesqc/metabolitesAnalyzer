@@ -217,13 +217,15 @@ get_volcano_plots = function(linear_model_res,
     dplyr::mutate( fdr = as.factor(fdr))
 
   vsize = expression( paste("-", log[10], " p-value"))
+  vx = expression(paste(log[2]," fold change Size of rectangles is proportional to -", log[10]," p-value"))
+  vy = expression( paste("-", log[10], " p-value"))
 
   p= df_vol%>%
     ggplot(aes(log2_fold, `-log10_p`, shape = fdr) )+
     geom_point(aes(size = size))+
-    xlab("log2 fold change")+
+    xlab(vx)+
     xlim(-1,1.8) +
-    ylab("-log10(p)")+
+    ylab(vy)+
     geom_hline(yintercept=1.3 ,linetype="dotted") +
     geom_vline(xintercept=log2(1.1487),linetype="dotted") +
     geom_vline(xintercept=-log2(1.1487) , linetype="dotted")+
