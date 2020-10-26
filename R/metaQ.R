@@ -54,15 +54,15 @@ metaQ = function(df_sample,
 
 
   pdf('t_SNE.pdf', width = 12, height = 8)
-  ggarrange(plot_tSNE[[1]], plot_tSNE[[2]], plot_tSNE[[3]], widths= c(1.5,1.5, 1.5))
+  egg::ggarrange(plot_tSNE[[1]], plot_tSNE[[2]], plot_tSNE[[3]], widths= c(1.5,1.5, 1.5))
   dev.off()
 
   pdf('well_median.pdf', width = 6, height = 9)
-  ggarrange(plot_moving_pp, plot_moving_sample, plot_moving_combined, heights = c(1.5,1.5, 1.5))
+  egg::ggarrange(plot_moving_pp, plot_moving_sample, plot_moving_combined, heights = c(1.5,1.5, 1.5))
   dev.off()
 
   pdf('cv_and_missing.pdf', width = 8, height = 12)
-  ggarrange(plot_na, plot_cv, heights = c(1.5,1.5))
+  egg::ggarrange(plot_na, plot_cv, heights = c(1.5,1.5))
   dev.off()
 
   return(list(na_count = na_count,  cv_res = cv_res, summary_report = psych_summary))

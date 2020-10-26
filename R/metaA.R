@@ -216,6 +216,8 @@ get_volcano_plots = function(linear_model_res,
     dplyr::mutate(fdr = ifelse(p.adjust<0.05, 1, 0) ) %>%
     dplyr::mutate( fdr = as.factor(fdr))
 
+  vsize = expression( paste("-", log[10], " p-value"))
+
   p= df_vol%>%
     ggplot(aes(log2_fold, `-log10_p`, shape = fdr) )+
     geom_point(aes(size = size))+
@@ -227,9 +229,16 @@ get_volcano_plots = function(linear_model_res,
     geom_vline(xintercept=-log2(1.1487) , linetype="dotted")+
     theme_bw()+
     theme(
-      legend.title = element_text(color = "black", size = 20),
-      legend.text = element_text(color = "black", size = 15)
-    )
+      legend.title = element_text(color = "black", size = 17),
+      legend.text = element_text(color = "black", size = 17),
+      axis.text.x = element_text(colour="black"),
+      axis.text.y = element_text(colour="black"),
+      axis.title.x = element_text(size = 17),
+      axis.title.y = element_text(size = 17)
+
+
+    )+
+    labs(shape="FDR significance",  size= vsize)
   return(p)
 }
 
