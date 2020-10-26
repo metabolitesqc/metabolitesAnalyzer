@@ -173,7 +173,7 @@ get_waterfall_plots = function(linear_model_res){
   scale.max= max(df_w$log10_p, na.rm = T)
   middle.pt = 1.3
 
-  by_scale = round(scale.max/4,2)
+  by_scale = round(scale.max/8,2)
 
   p= df_w %>%
     ggplot(aes( reorder(meta, -estimate ), estimate, fill =log10_p))+
