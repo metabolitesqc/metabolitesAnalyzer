@@ -139,7 +139,8 @@ get_linear_model_res = function(df_meta,
       dplyr::select(meta, wilcox_p_value, p.adjust)
 
     report = wilcox_report %>%
-      dplyr::left_join(lm_report, by ="meta")
+      dplyr::left_join(lm_report, by ="meta") %>%
+      dplyr::arrange( p.adjust)
 
     readr::write_csv( report, "lm_report.csv")
 
