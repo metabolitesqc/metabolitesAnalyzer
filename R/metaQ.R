@@ -396,6 +396,15 @@ get_median_plots_for_both = function(median_df){
 
 get_psych_summary = function(df){
   df_sum = psych::describe(df, fast= FALSE)
+
+  df_sum =df_sum %>%
+    dplyr::add_rownames(var = "meta")
+
+  meta_name = names(df_sum$meta)[grepl("[0-9]", names(df_sum$meta))]
+
+  df_sum =df_sum %>%
+    dplyr::filter( meta %in% meta_name )
+
   return(df_sum)
 }
 
