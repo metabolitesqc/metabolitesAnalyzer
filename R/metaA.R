@@ -212,7 +212,7 @@ get_volcano_plots = function(linear_model_res,
     dplyr::select(wilcox_p_value, p.adjust, fold_change) %>%
     dplyr::mutate(log2_fold = log2(fold_change),
                   `-log10_p` = -log10(wilcox_p_value)) %>%
-    dplyr::mutate(size = round(`-log10_p`*0.25,0)) %>%
+    dplyr::mutate(size = round(`-log10_p`,0)) %>%
     dplyr::mutate(fdr = ifelse(p.adjust<0.05, 1, 0) ) %>%
     dplyr::mutate( fdr = as.factor(fdr))
 
