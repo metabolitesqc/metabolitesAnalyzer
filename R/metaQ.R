@@ -400,7 +400,7 @@ get_psych_summary = function(df){
   df_sum =df_sum %>%
     dplyr::add_rownames(var = "meta")
 
-  meta_name = names(df_sum$meta)[grepl("[0-9]", names(df_sum$meta))]
+  meta_name = names(df)[grepl("[0-9]", names(df))]
 
   df_sum =df_sum %>%
     dplyr::filter( meta %in% meta_name )
