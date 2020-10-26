@@ -404,8 +404,8 @@ get_psych_summary = function(df){
 
   df_sum =df_sum %>%
     dplyr::filter( meta %in% meta_name ) %>%
-    dplyr::select( -vars, - mad) %>%
     dplyr::mutate( NA_count = nrow(df) - n) %>%
+    dplyr::select( -vars, - mad, -trimmed, -n) %>%
     dplyr::select(meta, NA_count, everything())
 
   return(df_sum)
