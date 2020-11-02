@@ -57,13 +57,15 @@ cat_var = c("diabetes","currentsmoker","africanamerican","statintreatment", "wom
 con_var = c("totalchol","trig","hdlc","ldlc","age","bmi", "hscrp","tnfr2", "il6" ,"glyca17", "sicam" )
 
 
-get_cat_var_summary = function(df, name){
+##group can be Treatment/case, Placebo/control, Total
+get_cat_var_summary = function(df, group){
 
   cat_var_df = as.data.frame(cat_var,
                              stringsAsFactors = FALSE)
 
   names(cat_var_df) = "cat_var"
 
+  #found categorical variable exisiting in df
   cat_var = cat_var_df %>%
     dplyr::mutate(cat_flag = ifelse(cat_var  %in% names(df), 1, 0)) %>%
     dplyr::filter(cat_flag ==1) %>%
@@ -89,14 +91,14 @@ get_cat_var_summary = function(df, name){
     dplyr::mutate( col_name = paste(sum, " (", mean, "%)", sep="")) %>%
     dplyr::select(-mean, -sum)
 
-  names(results)[2] = name
+  names(results)[2] = group
 
   return(results)
 }
 
 
 
-get_con_var_summary = function(df, name){
+get_con_var_summary = function(df, group){
 
   # for continious var
   con_var_df = as.data.frame(con_var,
@@ -134,7 +136,7 @@ get_con_var_summary = function(df, name){
     dplyr::mutate( col_name = paste(median, " (", low,"-", high,  ")", sep="")) %>%
     dplyr::select(-median, -low, -high )
 
-  names(results)[2] = name
+  names(results)[2] = group
 
   return(results)
 }
