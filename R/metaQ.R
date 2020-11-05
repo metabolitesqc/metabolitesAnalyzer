@@ -357,8 +357,8 @@ plot_moving_median = function(median_df){
   p =median_df %>%
     ggplot2::ggplot(aes(order, row_median, color = plate)) +
     ggplot2::geom_point()+
-    ggplot2::ylab("metabolite_median") +
-    ggplot2::ggtitle("metabolite_median vs analysis order")+
+    ggplot2::ylab("median") +
+    ggplot2::ggtitle("median vs analysis order")+
     ggplot2::theme(plot.title = element_text(hjust = 0.5, vjust = 0.5)) +
     theme_bw()
 
@@ -387,8 +387,8 @@ get_median_plots_for_both = function(median_df){
   p =median_df %>%
     ggplot2::ggplot(aes(order, row_median, color = group)) +
     ggplot2::geom_point()+
-    ggplot2::ylab("metabolite_median") +
-    ggplot2::ggtitle("metabolite_median vs analysis order")+
+    ggplot2::ylab("median") +
+    ggplot2::ggtitle("median vs analysis order")+
     ggplot2::theme(plot.title = element_text(hjust = 0.5, vjust = 0.5))+
     theme_bw()
 

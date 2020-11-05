@@ -130,6 +130,7 @@ get_linear_model_res = function(df_meta,
                    conf.low = round(conf.low, 3),
                    conf.high = round(conf.high, 3))
 
+#if trt_var is a categorical variable, also do a wilcox test
   if(length( unique(df_clinical[[trt_var]])) ==2 ){
     wilcox_report = df_long %>%
       dplyr::mutate( test = purrr::map(.$data, ~wilcox.test(f2, data =.x ))) %>%
