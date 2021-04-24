@@ -11,6 +11,7 @@
 #' @export
 metaG = function(df, trt_var){
 
+  #test
   names(df) = stringr::str_replace_all(names(df), "_", "")
   names(df) = stringr::str_to_lower(names(df))
 
