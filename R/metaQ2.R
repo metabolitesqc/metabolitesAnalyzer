@@ -13,7 +13,6 @@
 #' @param output_CV, defaults to true
 #' @param output_meta_summary, defaults to true
 #' @param plot_well_median, defaults to true
-
 #'
 #' @return list showing missing, cv, meta_summary
 #' @export
