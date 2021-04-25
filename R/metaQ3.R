@@ -1,4 +1,4 @@
-#' Checking metabolites quality2
+#' Checking metabolites quality3
 #'
 #' This function check the metabolites data quality. It assumes that the first column of df_sample
 #' contains the subjectId, with or without year, plate_well in the second and third column.  in the subsequent columns
@@ -16,7 +16,7 @@
 #'
 #' @return list showing missing, cv, meta_summary
 #' @export
-metaQ2 = function(df_sample,
+metaQ3 = function(df_sample,
                  df_pp,
                  plot_missing= TRUE,
                  output_missing = TRUE,
