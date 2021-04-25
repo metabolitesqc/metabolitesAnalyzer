@@ -2,7 +2,7 @@
 % Please edit documentation in R/metaQ2.R
 \name{metaQ2}
 \alias{metaQ2}
-\title{Checking metabolites quality}
+\title{Checking metabolites quality2}
 \usage{
 metaQ2(
   df_sample,

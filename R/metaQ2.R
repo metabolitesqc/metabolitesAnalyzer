@@ -1,4 +1,4 @@
-#' Checking metabolites quality
+#' Checking metabolites quality2
 #'
 #' This function check the metabolites data quality. It assumes that the first column of df_sample
 #' contains the subjectId, with or without year, plate_well in the second and third column.  in the subsequent columns
@@ -218,7 +218,7 @@ get_pp_cv_plot = function(df_pp){
 
 
 }
-?ggplot2::geom_segment()
+
 
 
 
