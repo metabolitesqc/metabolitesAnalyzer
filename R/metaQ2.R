@@ -47,8 +47,6 @@ metaQ2 = function(df_sample,
   cv_res = get_cv(df_pp)
   plot_cv = get_pp_cv_plot(df_pp)
 
-
-
   psych_summary = get_psych_summary(df_sample)
 
 
@@ -61,7 +59,8 @@ metaQ2 = function(df_sample,
   dev.off()
 
 
-  return(list(na_count = na_count,  cv_res = cv_res, summary_report = psych_summary))
+  return(list(na_count = na_count,  cv_res = cv_res, summary_report = psych_summary, plot_list=list(
+    plot_moving_pp, plot_moving_sample, plot_moving_combined, plot_na, plot_cv)))
 
 }
 
