@@ -279,7 +279,7 @@ get_tSNE_plots = function(df, perplexity=30){
 
   df = df[ names(df) %in% c("plate", meta)]
 
-  tsne_output  = Rtsne(df[,-c(1)],dims = 3,
+  tsne_output  = Rtsne( as.matrix(df[,-c(1)]),dims = 3,
                        theta =0, pca=TRUE,
                        initial_dims = 200, eta=100, verbose=FALSE,
                        max_iter = 500 , pca_scale=TRUE, check_duplicates = FALSE)
