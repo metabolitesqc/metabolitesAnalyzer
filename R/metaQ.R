@@ -211,6 +211,8 @@ get_pp_cv_plot = function(df_pp){
   c <- round(0.2*nrow(df_pp),0)
   d <- round(0.3*nrow(df_pp),0)
 
+  e <- nrow(df_pp)
+
   p<-cv_res %>%
     ggplot2::ggplot(aes(CV, percentage))+labs(x="CV %", y="cumulative % of metabolites") + xlim(-15, xmax+15)+
     ggplot2::geom_point() +
@@ -236,7 +238,7 @@ get_pp_cv_plot = function(df_pp){
     geom_hline(yintercept=p10 , linetype = "dashed", color = "red")+
     geom_hline(yintercept=p20 , linetype = "dashed", color = "red")+
     geom_hline(yintercept=p30 , linetype = "dashed", color = "red")+
-    ggplot2::scale_y_continuous(limits=c(-7, 107),
+    ggplot2::scale_y_continuous(limits=c(-7, e+10),
                                 expand = c(0, 0),
                                 breaks = sort(c(seq(0, 100, length.out=5), p5, p10, p20, p30)),
                                 name = expression("percentage of metabolittes CV below cut"),
