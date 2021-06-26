@@ -206,6 +206,11 @@ get_pp_cv_plot = function(df_pp){
 
   xmax<-round(max(cv_res$CV, na.rm=T), 0)
 
+  a <- round(0.05*nrow(df_pp),0)
+  b <- round(0.1*nrow(df_pp),0)
+  c <- round(0.2*nrow(df_pp),0)
+  d <- round(0.3*nrow(df_pp),0)
+
   p<-cv_res %>%
     ggplot2::ggplot(aes(CV, percentage))+labs(x="CV %", y="cumulative % of metabolites") + xlim(-15, xmax+15)+
     ggplot2::geom_point() +
@@ -223,13 +228,21 @@ get_pp_cv_plot = function(df_pp){
     ggplot2::geom_hline(yintercept = 0, linetype = "solid", color = "black") +
     ggplot2::geom_vline(xintercept = 0, linetype = "solid", color = "black") +
     ggplot2::scale_y_continuous(limits=c(-7, 107), expand = c(0, 0), breaks = sort(c(seq(0, 100, length.out=5), p5, p10, p20, p30)))+
-    ggplot2::scale_x_continuous(limits=c(-15, xmax+15), expand = c(0, 0), breaks = sort(c(seq(0, trunc(xmax/100)*100, length.out=5), 5, 10, 20, 30, trunc(xmax/100)*100, 0)))
+    ggplot2::scale_x_continuous(limits=c(-15, xmax+15), expand = c(0, 0), breaks = sort(c(seq(0, trunc(xmax/100)*100, length.out=5), 5, 10, 20, 30, trunc(xmax/100)*100, 0)))+
+    sec.axis = sec_axis(~ . * 100 / nrow(df_pp) ,
+                        name = "number of metabolites",
+                        breaks = sort(c(seq(0, 100, length.out=5),
+                                        a,
+                                        b,
+                                        c,
+                                        d)))
+
 
   return(p)
 
 
 }
-?ggplot2::geom_segment()
+
 
 
 
