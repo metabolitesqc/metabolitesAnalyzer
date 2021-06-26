@@ -217,25 +217,40 @@ get_pp_cv_plot = function(df_pp){
     theme_bw() +
     ggplot2::ggtitle("% of PP metabolites with CVs less than given threshold") +
     ggplot2::theme(plot.title = element_text(hjust = 0.5, vjust = 0.5))+
-    ggplot2::geom_segment(aes(x = -15, y = p5, xend = 5.0, yend = p5), linetype = "dashed", color = "blue") +
-    ggplot2::geom_segment(aes(x = -15, y = p10, xend = 10.0, yend = p10), linetype = "dashed", color = "blue") +
-    ggplot2::geom_segment(aes(x = -15, y = p20, xend = 20.0, yend = p20), linetype = "dashed", color = "blue") +
-    ggplot2::geom_segment(aes(x = -15, y = p30, xend = 30.0, yend = p30), linetype = "dashed", color = "blue") +
-    ggplot2::geom_segment(aes(x = 5.0, y = -7, xend = 5.0, yend = p5), linetype = "dashed", color = "red") +
-    ggplot2::geom_segment(aes(x = 10.0, y = -7, xend = 10.0, yend = p10), linetype = "dashed", color = "red") +
-    ggplot2::geom_segment(aes(x = 20.0, y = -7, xend = 20.0, yend = p20), linetype = "dashed", color = "red") +
-    ggplot2::geom_segment(aes(x = 30.0, y = -7, xend = 30.0, yend = p30), linetype = "dashed", color = "red") +
-    ggplot2::geom_hline(yintercept = 0, linetype = "solid", color = "black") +
-    ggplot2::geom_vline(xintercept = 0, linetype = "solid", color = "black") +
-    ggplot2::scale_y_continuous(limits=c(-7, 107), expand = c(0, 0), breaks = sort(c(seq(0, 100, length.out=5), p5, p10, p20, p30)))+
-    ggplot2::scale_x_continuous(limits=c(-15, xmax+15), expand = c(0, 0), breaks = sort(c(seq(0, trunc(xmax/100)*100, length.out=5), 5, 10, 20, 30, trunc(xmax/100)*100, 0)))+
-    sec.axis = sec_axis(~ . * 100 / nrow(df_pp) ,
-                        name = "number of metabolites",
-                        breaks = sort(c(seq(0, 100, length.out=5),
-                                        a,
-                                        b,
-                                        c,
-                                        d)))
+    # ggplot2::geom_segment(aes(x = -15, y = p5, xend = 5.0, yend = p5), linetype = "dashed", color = "blue") +
+    # ggplot2::geom_segment(aes(x = -15, y = p10, xend = 10.0, yend = p10), linetype = "dashed", color = "blue") +
+    # ggplot2::geom_segment(aes(x = -15, y = p20, xend = 20.0, yend = p20), linetype = "dashed", color = "blue") +
+    # ggplot2::geom_segment(aes(x = -15, y = p30, xend = 30.0, yend = p30), linetype = "dashed", color = "blue") +
+    # ggplot2::geom_segment(aes(x = 5.0, y = -7, xend = 5.0, yend = p5), linetype = "dashed", color = "red") +
+    # ggplot2::geom_segment(aes(x = 10.0, y = -7, xend = 10.0, yend = p10), linetype = "dashed", color = "red") +
+    # ggplot2::geom_segment(aes(x = 20.0, y = -7, xend = 20.0, yend = p20), linetype = "dashed", color = "red") +
+    # ggplot2::geom_segment(aes(x = 30.0, y = -7, xend = 30.0, yend = p30), linetype = "dashed", color = "red") +
+
+    # ggplot2::geom_hline(yintercept = 0, linetype = "solid", color = "black") +
+    # ggplot2::geom_vline(xintercept = 0, linetype = "solid", color = "black") +
+    geom_vline(xintercept=5 , linetype = "dashed", color = "red") +
+    geom_vline(xintercept=10 , linetype = "dashed", color = "red") +
+    geom_vline(xintercept=20 , linetype = "dashed", color = "red") +
+    geom_vline(xintercept=30 , linetype = "dashed", color = "red") +
+    geom_hline(yintercept=p5, linetype = "dashed", color = "red") +
+    geom_hline(yintercept=p10 , linetype = "dashed", color = "red")+
+    geom_hline(yintercept=p20 , linetype = "dashed", color = "red")+
+    geom_hline(yintercept=p30 , linetype = "dashed", color = "red")+
+    ggplot2::scale_y_continuous(limits=c(-7, 107),
+                                expand = c(0, 0),
+                                breaks = sort(c(seq(0, 100, length.out=5), p5, p10, p20, p30)),
+                                name = expression("percentage of metabolittes CV below cut"),
+                                sec.axis = sec_axis(~ . * 100 / nrow(df_pp) ,
+                                                    name = "number of metabolites",
+                                                    breaks = sort(c(seq(0, 100, length.out=5),
+                                                                    a,
+                                                                    b,
+                                                                    c,
+                                                                    d)))
+                                )+
+    ggplot2::scale_x_continuous(limits=c(-15, xmax+15), expand = c(0, 0), breaks = sort(c(seq(0, trunc(xmax/100)*100, length.out=5), 5, 10, 20, 30,
+                                                                                          trunc(xmax/100)*100, 0)))
+
 
 
   return(p)
