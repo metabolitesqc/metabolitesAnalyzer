@@ -189,7 +189,12 @@ get_pp_cv_plot = function(df_pp){
     dplyr::select( -plate_well )
 
 
-  cv_res = as.data.frame(sapply(pp_meta_df, raster::cv))
+  sd_val <- sapply(input_df, sd, na.rm = T)
+  
+  mean_val = sapply( input_df, mean, na.rm =T)
+
+
+  cv_res <- as.data.frame(sd_val / mean_val)
   names(cv_res) = c("CV")
 
   cv_res = cv_res[order(cv_res$CV),,drop=FALSE]
